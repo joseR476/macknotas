@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>P1 e P2</title>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+
+<style>
+h1 {	font-size: 4em;
+	margin: 35px;
+	font-family: chalkboard,cursive; 
+	color: #ffffff;
+	text-align: center;
+   }
+p  {
+    	font-size: 1.375em;
+	margin: 8px;
+	font-family: adventure;
+	font-style: initial;
+	columns: #000000; 
+	text-align: center;
+	}
+body {
+	background-attachment: fixed;
+	text-align: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-color: #f7941e;
+	}
+
+.parent {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	}
+	
+.box {
+	flex-grow: 1;
+	min-width: 300px;
+	max-width: 500px;
+	flex: 0 0 30%;
+	margin: 5px;
+	}
+
+div.image1 {
+	background-size: 30%;
+	max-width: 100%; 
+	border-radius: 10px;}
+
+div.mapa{
+	width: 300px;
+	height: 230px;
+	border-radius: 30px;
+	background-color: #F5DEB3;
+	padding: 50px;
+    	margin: 15px auto;
+}
+.popup {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 2000;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	
+
+	}
+.popup-conteudo {
+		font-family: arial;
+		text-align: justify-all;
+		width: 60%;
+		min-width: 5px;
+		max-width: 300px;
+		margin: 5% auto;
+		padding: 100px;
+		background-image: url("mapa.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		border-radius: 10%;
+		}
+		
+.button3{display: inline-block;
+		margin: 1.5px;
+		border: 10px;
+		padding: 10px 30px;
+		text-decoration: none;
+		color: #FFFFFF;
+		font-size: 1.2em;
+		background-color: #8B4726;
+		background-size: 100%;
+		background-repeat: no-repeat;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+		border-radius: 0.5em;
+		box-shadow: 3px 3px 0 3px #FF8247;
+		transition: box-shadow 0.3s ease, transform 0.3s ease;
+		cursor: pointer;
+	}
+
+.button3:active 
+		{box-shadow: 0 0 0 0 #930,
+		inset 4px 4px 4px #8B4726;
+		transform: translate(10px, 6px)}
+
+.voltar{
+ 	position: fixed; 
+   	top:15%;
+   	left:11%;
+ 	transform: translate(-100%, -100%);
+ 	display: flex
+ 	;
+}
+
+
+</style>
+<body>
+
+<div class="content">
+   
+</div>
+
+<div class="image1">
+<center><img src="logo.jpg" width="650" height="250"></center>
+</div>
+</head>
+
+
+<div class="mapa">
+
+	
+<p>Nota N1: <input type="number" name="entrada" max="10" min="0" id="v1"></p>
+<p>Nota Moodle: <input type="number" name="entrada" max="10" min="0" id="v4"></p>
+<p>Nota de Participação: <input type="number" name="entrada" max="1" min="0" id="v7"></p><br>
+
+<button id="limpar" class="button3" >Limpar</button>
+
+<button class="button3" onclick="somar();javascript: abrir();">Somar</button>
+
+</div>
+	
+
+
+<div id="popup" class="popup">		
+	<div id="popup-conteudo" class="popup-conteudo">
+		<p id="demo"></p><br><br>
+		<a class="button3" onclick="javascript: fechar();">Voltar</a>
+	</div>
+</div>
+<script>
+	function abrir(){
+		document.getElementById('popup').style.display = 'block';}
+	function fechar(){
+		document.getElementById('popup').style.display =  'none';};
+
+		document.getElementById("limpar").addEventListener("click", function() {
+  clearInputUrlNumberText("entrada");})
+
+function clearInputUrlNumberText(name){
+  	var entradas = document.querySelectorAll("input[name='"+name+"']");
+  	[].map.call(entradas, entrada => entrada.value = '');};
+
+function somar() {
+var v1 = parseFloat(document.getElementById("v1").value);
+var v3 = (v1) / 2 * 6;
+var v4 = parseFloat(document.getElementById("v4").value);
+var v5 = (v4) * 4;
+var v7 = parseFloat(document.getElementById("v7").value);   
+var v6 = (v3 + v5) / 10 + v7;
+		if (!document.getElementById("v1").value || !document.getElementById("v4").value || !document.getElementById("v7").value) { document.getElementById("demo").innerHTML = "Favor preencher todos os campos!"; }
+	else {
+    	if (v6 >= 10) {
+ 			document.getElementById("demo").innerHTML = "Sua nota é: <br><br> 10.0";}
+        else {
+        	document.getElementById("demo").innerText = (v6).toFixed(2);
+
+		var v2 = (6 - v6) / 0.3;
+    	if (v6 < 6)  {
+ 			document.getElementById("demo").innerHTML = "Sua nota é: <br><br>" + (v6).toFixed(2)+" <br><br>Você precisa tirar "+(v2).toFixed(2)+" na P2 para passar de semestre." ;}
+        else {
+        	document.getElementById("demo").innerHTML = "Sua nota é: <br><br>" + (v6).toFixed(2)+ "<br><br> Você já passou, mesmo que tire 0 na P2, parabéns!!! <br><br>ATENÇÃO<br> Mesmo que já tenha passado e sua nota é " + (v6).toFixed(2)+", isso não te insenta de realizar a segunda prova (P2), então se prepare!";}
+        
+        if (v2 > 10) {
+         			document.getElementById("demo").innerHTML = "Sua nota é: <br><br>" + (v6).toFixed(2)+ "<br><br>Sabemos que a nota máxima da prova é 10, mas você precisa tirar "+(v2).toFixed(2)+", sendo assim, para ser aprovado é necessário tirar na P2 a nota 10, e também melhorar sua nota do moodle e/ou a nota de participação.";}
+}
+}
+}
+</script>
+	<a href="homepage.html"><br><br>
+	<center><img class="voltar" src="voltar.png" style="width: 150px"></center>
+	
+</body>
+</html>
